@@ -54,36 +54,3 @@ resource "aws_iam_role_policy_attachment" "codedeploy_policy" {
   role       = aws_iam_role.codedeploy_role.name
   policy_arn = "arn:aws:iam::aws:policy/AWSCodeDeployFullAccess"
 }
-
-
-resource "aws_iam_role" "codepipeline_role" {
-  name = "codepipeline-role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Principal = {
-          Service = "codepipeline.amazonaws.com"
-        },
-        Action = "sts:AssumeRole"
-      }
-    ]
-  })
-
-  inline_policy {
-    name = "AllowCrossAccountAssumeRole"
-
-    policy = jsonencode({
-      Version = "2012-10-17",
-      Statement = [
-        {
-          Effect = "Allow",
-          Action = "sts:AssumeRole",
-          Resource = "arn:aws:iam::961657839676:role/OrganizationAccountAccessRole"
-        }
-      ]
-    })
-  }
-}
