@@ -5,10 +5,10 @@ resource "aws_s3_bucket_policy" "codepipeline_artifacts" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid       = "AllowCodePipelinePutObject",
+        Sid       = "AllowCodePipelineRolePutObject",
         Effect    = "Allow",
         Principal = {
-          Service = "codepipeline.amazonaws.com"
+          AWS = aws_iam_role.codepipeline_role.arn
         },
         Action    = "s3:PutObject",
         Resource  = "arn:aws:s3:::luke-terraform-demo-bucket/*"
