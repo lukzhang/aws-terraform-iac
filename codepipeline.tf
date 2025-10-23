@@ -19,8 +19,8 @@ resource "aws_codepipeline" "s3_pipeline" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        Owner  = "YOUR_GITHUB_USERNAME"
-        Repo   = "YOUR_REPO_NAME"
+        Owner  = "lukzhang"
+        Repo   = "aws-terraform-iac"
         Branch = "main"
         OAuthToken = var.github_token
       }
